@@ -36,6 +36,7 @@
   /* Scoring as in the app: first correct answer 1, then 2 each, 10 each once the score reaches 15; a hinted word is worth half (rounded up). */
   function points(hinted) { var p = S.correct === 0 ? 1 : (S.score >= 15 ? 10 : 2); return hinted ? Math.ceil(p / 2) : p; }
   var level = "easy";
+  var remind = true;
   var root = document.querySelector(".phone .mock");
   if (!root) return;
   var S = null;
@@ -64,9 +65,11 @@
       '<div class="set-btns">' + ["easy", "medium", "hard"].map(function (k) {
         return '<button class="lvl' + (k === level ? " sel" : "") + '" data-lvl="' + k + '">' + LEVELS[k].label + "</button>";
       }).join("") + "</div>" +
+      '<div class="set-rem"><span>Daily reminder</span><button class="sw' + (remind ? " on" : "") + '" role="switch" aria-checked="' + remind + '" aria-label="Daily reminder"><i></i></button></div>' +
       '<a class="set-pp" href="privacy.html">Privacy Policy</a></div>';
     on(".back", menu);
     on(".lvl", function (el) { level = el.getAttribute("data-lvl"); settings(); });
+    on(".sw", function () { remind = !remind; settings(); });
   }
 
   /* ---------- game ---------- */
@@ -75,6 +78,13 @@
     var L = LEVELS[level];
     var pool = shuffle(CARDS.filter(function (c) { return c.errors.length <= L.maxErr; }));
     S = { L: L, deck: pool.slice(0, ROUNDS), i: 0, played: 0, score: 0, correct: 0, hearts: HEARTS, hints: HINTS, timer: null, swipeTimer: null };
+    loadCard();
+  }
+  /* RETRY, as in the app: score, hearts and hints reset, but the deck continues from the card you failed on */
+  function retryGame() {
+    stopTimers();
+    var deck = S.deck.slice(S.i).concat(S.deck.slice(0, S.i));
+    S = { L: S.L, deck: deck, i: 0, played: 0, score: 0, correct: 0, hearts: HEARTS, hints: HINTS, timer: null, swipeTimer: null };
     loadCard();
   }
   function loadCard() {
@@ -212,9 +222,10 @@
         '<div class="hearts dim">' + hearts() + "</div>" +
         '<div class="chips"><span class="chip ghost"></span></div>' +
         '<div class="card dim"><span class="tm">' + S.left + '</span><div class="txt">' + S.tokens.map(function (t) { if (t.fixed) return t.err.correct === "\u2014" ? "" : esc(t.err.correct); return t.err ? '<span class="w' + (S.L.italic ? " it" : "") + '">' + esc(t.text) + "</span>" : esc(t.text); }).join("").replace(/\s{2,}/g, " ") + "</div>" +
-          '<div class="over-score">' + S.score + '</div><button class="pbtn resume mm">MAIN MENU</button></div>' +
+          '<div class="over-score">' + S.score + '</div><button class="pbtn resume retry">RETRY</button><button class="pbtn exit quitb">EXIT</button></div>' +
         '<div class="score dim">' + S.score + "</div>";
-      on(".mm", menu);
+      on(".retry", retryGame);
+      on(".quitb", menu);
       return;
     }
     root.innerHTML =

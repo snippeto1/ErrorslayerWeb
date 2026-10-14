@@ -89,7 +89,12 @@ section.after-feats{padding-top:3.5rem !important}
 .phone .set-btns{display:flex;flex-direction:column;gap:.75rem;width:70%;margin:auto 0}
 .phone .lvl{background:#2E1A5A;color:#fff;border:0;border-radius:999px;padding:.7rem 0;font:inherit;font-weight:800;font-size:1.05rem;cursor:pointer;box-shadow:0 .3rem 0 #B56CE0;box-sizing:border-box;border:3px solid transparent}
 .phone .lvl.sel{border-color:var(--coral)}
-.phone .set-pp{color:#8A8798;font-weight:700;font-size:.85rem;text-decoration:underline;margin-top:auto}
+.phone .set-btns{margin:auto 0 0}
+.phone .set-rem{margin-top:auto;width:84%;background:#fff;border-radius:.8rem;padding:.6rem .8rem;display:flex;align-items:center;justify-content:space-between;color:var(--ink);font-weight:600;font-size:.9rem}
+.phone .sw{width:2.6rem;height:1.5rem;border-radius:999px;border:0;background:#D9D4E3;position:relative;cursor:pointer;padding:0;transition:background .2s}
+.phone .sw i{position:absolute;top:.15rem;left:.15rem;width:1.2rem;height:1.2rem;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .2s}
+.phone .sw.on{background:var(--purple)}.phone .sw.on i{left:1.25rem}
+.phone .set-pp{color:#8A8798;font-weight:700;font-size:.85rem;text-decoration:underline;margin-top:.7rem}
 .phone .hud button.ic{cursor:pointer;padding:0;background:none;border:0;font:inherit}
 .phone .mock{user-select:none;-webkit-user-select:none}
 .phone .hud .l,.phone .hud .r{display:flex;align-items:center;gap:.9rem}
@@ -203,6 +208,7 @@ body.journey-page>.wrap{width:100%;flex:none}
 .jarrow{width:2.5rem;height:auto;flex:none;margin-top:.6rem}
 .jphone{flex:0 0 15rem;position:relative;height:30rem;margin-left:.5rem}
 .jphone .phone{width:14rem;top:1.5rem;left:50%;transform:translateX(-50%) rotate(-5deg)}
+.jphone .shotimg{object-position:top}
 .jcrown{position:absolute;left:38%;top:-.4rem;width:2.6rem;height:auto;transform:rotate(-8deg);z-index:4}
 .jlab{position:absolute;z-index:3;font-family:"Chalkboard SE","Comic Sans MS","Marker Felt",cursive;font-weight:700;color:var(--purple);font-size:1.15rem;line-height:1.2;text-transform:none;letter-spacing:0}
 .jlab svg{width:3rem;height:auto;display:block}
