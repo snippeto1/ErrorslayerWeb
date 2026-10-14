@@ -214,7 +214,7 @@
         '<div class="end-label">' + (reason ? esc(reason) : "Demo complete") + "</div>" +
         '<div class="end-score">' + S.score + "</div>" +
         '<div class="end-sub">' + (reason ? "Nice try. That was a taste of thousands." : "That was 5 cards of thousands.") + "</div>" +
-        '<div class="end-badges"><a href="#" aria-label="Download on the App Store"><img src="app-store-badge.svg" alt="App Store"></a><a href="#" aria-label="Get it on Google Play"><img src="google-play-badge.svg" alt="Google Play"></a></div>' +
+        '<div class="end-badges"><a href="https://apps.apple.com/app/id6822198824" target="_blank" rel="noopener" aria-label="Download on the App Store"><img src="app-store-badge.svg" alt="App Store"></a><a href="#" aria-label="Get it on Google Play"><img src="google-play-badge.svg" alt="Google Play"></a></div>' +
         '<button class="again">Main menu</button>' +
       "</div>";
     on(".again", menu);
