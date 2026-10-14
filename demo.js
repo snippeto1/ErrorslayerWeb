@@ -1,6 +1,14 @@
 /* Error Slayer: playable demo inside the landing-page phone.
    Main menu -> (Settings: Easy / Medium / Hard) -> 5 cards -> score screen. */
 (function () {
+  var SVG = 'xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+  var ICO = {
+    pause: '<svg ' + SVG + '><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5v7M14 8.5v7"/></svg>',
+    bulb:  '<svg ' + SVG + '><path d="M9 18h6M10 21h4M8.5 14.2A6.5 6.5 0 1 1 15.5 14.2c-.7.6-1 1.4-1 2.3V17h-5v-.5c0-.9-.3-1.7-1-2.3z"/></svg>',
+    snd:   '<svg ' + SVG + '><path d="M4 9.5v5h3.5L13 19V5L7.5 9.5H4z"/><path d="M16.5 9.2a4 4 0 0 1 0 5.6M19 7a7.5 7.5 0 0 1 0 10"/></svg>',
+    cup:   '<svg ' + SVG + '><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4.5a2.5 2.5 0 0 0 2.6 2.5M17 6h2.5a2.5 2.5 0 0 1-2.6 2.5M12 14v3.5M8.5 20.5h7M9.5 17.5h5l.5 3h-6l.5-3z"/></svg>',
+    gear:  '<svg ' + SVG + '><circle cx="12" cy="12" r="3"/><path d="M12 2.8l1.6 2.3 2.7-.8.8 2.7 2.7.8-.8 2.7 2.3 1.6-2.3 1.6.8 2.7-2.7.8-.8 2.7-2.7-.8L12 21.2l-1.6-2.3-2.7.8-.8-2.7-2.7-.8.8-2.7L2.8 12l2.3-1.6-.8-2.7 2.7-.8.8-2.7 2.7.8L12 2.8z"/></svg>'
+  };
   var CARDS = [
     { text: "Printmaking allowed a single artist to reach buyers across {{the}} Europe.",
       errors: [{ wrong: "the", correct: "—", distractors: ["an", "this"], rule: "Articles" }] },
@@ -52,7 +60,7 @@
   function settings() {
     stopTimers();
     root.innerHTML = '<div class="set">' +
-      '<div class="set-bar"><button class="back" aria-label="Back">‹</button><span>Settings</span><i class="ic snd"></i></div>' +
+      '<div class="set-bar"><button class="back" aria-label="Back">‹</button><span>Settings</span><i class="ic snd">' + ICO.snd + '</i></div>' +
       '<div class="set-btns">' + ["easy", "medium", "hard"].map(function (k) {
         return '<button class="lvl' + (k === level ? " sel" : "") + '" data-lvl="' + k + '">' + LEVELS[k].label + "</button>";
       }).join("") + "</div>" +
@@ -106,7 +114,7 @@
     }).join("").replace(/\s{2,}/g, " ");
     if (S.paused) {
       root.innerHTML =
-        '<div class="hud paused"><span class="l"><b class="pcount">' + S.score + '</b></span><span class="r"><i class="ic snd"></i><i class="ic cup"></i><i class="ic gear"></i></span></div>' +
+        '<div class="hud paused"><span class="l"><b class="pcount">' + S.score + '</b></span><span class="r"><i class="ic snd">' + ICO.snd + '</i><i class="ic cup">' + ICO.cup + '</i><i class="ic gear">' + ICO.gear + '</i></span></div>' +
         '<div class="hearts dim">' + hearts() + "</div>" +
         '<div class="chips"><span class="chip ghost"></span></div>' +
         '<div class="card dim"><span class="tm">' + S.left + '</span><div class="txt">' + S.tokens.map(function (t) { return t.err && !t.fixed ? '<span class="w' + (S.L.italic ? " it" : "") + '">' + esc(t.text) + "</span>" : esc(t.fixed ? t.err.correct : t.text); }).join("") + "</div>" +
@@ -118,7 +126,7 @@
       return;
     }
     root.innerHTML =
-      '<div class="hud"><span class="l"><button class="ic pause" aria-label="Pause"></button><button class="bulb" aria-label="Hint"><i class="ic bulbi"></i><b>' + S.hints + '</b></button></span><span class="r"><i class="ic snd"></i><i class="ic cup"></i><button class="ic gear" aria-label="Settings"></button></span></div>' +
+      '<div class="hud"><span class="l"><button class="ic pause" aria-label="Pause">' + ICO.pause + '</button><button class="bulb" aria-label="Hint"><i class="ic bulbi">' + ICO.bulb + '</i><b>' + S.hints + '</b></button></span><span class="r"><i class="ic snd">' + ICO.snd + '</i><i class="ic cup">' + ICO.cup + '</i><button class="ic gear" aria-label="Settings">' + ICO.gear + '</button></span></div>' +
       '<div class="hearts">' + hearts() + "</div>" +
       '<div class="chips">' + chips + "</div>" +
       '<div class="card' + (S.done ? " done" : "") + '"><span class="tm">' + S.left + '</span><div class="txt">' + words + "</div>" +
@@ -200,7 +208,7 @@
       /* game over, as in the app: everything dims, the score sits on the card, one button back to the menu */
       S.paused = false;
       root.innerHTML =
-        '<div class="hud"><span class="l"><span class="bulb dim"><i class="ic bulbi"></i><b>' + S.hints + '</b></span></span><span class="r"><i class="ic snd"></i><i class="ic cup"></i><i class="ic gear"></i></span></div>' +
+        '<div class="hud"><span class="l"><span class="bulb dim"><i class="ic bulbi">' + ICO.bulb + '</i><b>' + S.hints + '</b></span></span><span class="r"><i class="ic snd">' + ICO.snd + '</i><i class="ic cup">' + ICO.cup + '</i><i class="ic gear">' + ICO.gear + '</i></span></div>' +
         '<div class="hearts dim">' + hearts() + "</div>" +
         '<div class="chips"><span class="chip ghost"></span></div>' +
         '<div class="card dim"><span class="tm">' + S.left + '</span><div class="txt">' + S.tokens.map(function (t) { if (t.fixed) return t.err.correct === "\u2014" ? "" : esc(t.err.correct); return t.err ? '<span class="w' + (S.L.italic ? " it" : "") + '">' + esc(t.text) + "</span>" : esc(t.text); }).join("").replace(/\s{2,}/g, " ") + "</div>" +

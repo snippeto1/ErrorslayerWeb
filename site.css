@@ -34,7 +34,6 @@ body.home .blob{inset:6% 0 8%}
 footer.slim{padding:.9rem 0;border-top:0;background:var(--lav);flex:none}
 body.home>.wrap:last-of-type{background:var(--lav)}
 @media(max-width:1100px),(max-height:700px){body.home{height:auto;overflow:visible}body.home .band.fill{display:block}body.home .stage{height:36rem}body.home .phone{top:.5rem;transform:translateX(-50%) rotate(6deg);width:20.5rem}}
-@media(max-width:480px){body.home .phone{transform:translateX(-50%) rotate(0)}}
 /* about page: feature cards sit under the curve, then the text */
 .band.curve + .wrap > .feats{margin-top:0;position:relative;z-index:5}
 section.after-feats{padding-top:3.5rem !important}
@@ -91,17 +90,15 @@ section.after-feats{padding-top:3.5rem !important}
 .phone .lvl{background:#2E1A5A;color:#fff;border:0;border-radius:999px;padding:.7rem 0;font:inherit;font-weight:800;font-size:1.05rem;cursor:pointer;box-shadow:0 .3rem 0 #B56CE0;box-sizing:border-box;border:3px solid transparent}
 .phone .lvl.sel{border-color:var(--coral)}
 .phone .set-pp{color:#8A8798;font-weight:700;font-size:.85rem;text-decoration:underline;margin-top:auto}
-.phone .hud button.ic{cursor:pointer;padding:0;background:none;font:inherit}
+.phone .hud button.ic{cursor:pointer;padding:0;background:none;border:0;font:inherit}
 .phone .mock{user-select:none;-webkit-user-select:none}
-.phone .hud .l,.phone .hud .r{display:flex;align-items:center;gap:.7rem}
-.phone .ic{display:inline-block;width:1.15rem;height:1.15rem;border:2px solid #7A7686;border-radius:50%;position:relative;box-sizing:border-box}
-.phone .ic.pause::before,.phone .ic.pause::after{content:"";position:absolute;top:.25rem;width:.12rem;height:.45rem;background:#7A7686;left:.3rem}.phone .ic.pause::after{left:.55rem}
-.phone .ic.bulbi{border-radius:50% 50% 40% 40%;width:.95rem;height:1.15rem}.phone .ic.bulbi::after{content:"";position:absolute;left:.2rem;right:.2rem;bottom:-.3rem;height:.2rem;background:#7A7686;border-radius:.1rem}
-.phone .ic.snd{border:0;width:.6rem;height:.8rem;background:#7A7686;clip-path:polygon(0 30%,40% 30%,100% 0,100% 100%,40% 70%,0 70%)}
-.phone .ic.cup{border:0;width:.9rem;height:1rem;background:#7A7686;clip-path:polygon(10% 0,90% 0,90% 45%,65% 65%,65% 80%,85% 80%,85% 100%,15% 100%,15% 80%,35% 80%,35% 65%,10% 45%)}
-.phone .ic.gear{border:.22rem solid #7A7686;width:1.05rem;height:1.05rem}
+.phone .hud .l,.phone .hud .r{display:flex;align-items:center;gap:.9rem}
+.phone .ic{display:inline-flex;align-items:center;justify-content:center;width:1.35rem;height:1.35rem;color:#6E6A78;font-style:normal}
+.phone .ic svg{width:100%;height:100%;display:block}
+.phone .ic.pause{width:1.5rem;height:1.5rem}
+.phone .ic.bulbi{width:1.45rem;height:1.45rem}
 .phone .hud .bulb{background:none;border:0;padding:0;font:inherit;cursor:pointer;position:relative;color:inherit;display:inline-flex}
-.phone .hud .bulb b{position:absolute;top:-.45rem;right:-.55rem;background:var(--coral);color:#fff;font-style:normal;font-size:.6rem;border-radius:999px;min-width:1rem;height:1rem;line-height:1rem;text-align:center;padding:0 .2rem}
+.phone .hud .bulb b{position:absolute;top:-.35rem;right:-.45rem;background:var(--coral);color:#fff;font-style:normal;font-size:.6rem;border-radius:999px;min-width:1rem;height:1rem;line-height:1rem;text-align:center;padding:0 .2rem}
 .phone .hearts b{font-weight:400;transition:opacity .25s}.phone .hearts b.lost{opacity:.22}
 .phone .chips button.chip{border:0;font-family:inherit;cursor:pointer;transition:transform .1s}.phone .chips button.chip:active{transform:scale(.95)}
 .phone .chip.ghost{visibility:hidden}
@@ -242,14 +239,22 @@ footer a.social{display:inline-flex;align-items:center;gap:.4rem}footer a.social
 @media(max-width:768px){
   nav{gap:1rem}nav a{font-size:.95rem}
   .feats{grid-template-columns:1fr}.feats .feat:last-child{grid-column:auto}
-  .hero h1{font-size:2.3rem}.phone{width:17rem}
-  .float.a{left:0;top:30%}.float.b{right:0;top:20%}.float.c{right:0;top:auto;bottom:0;width:13rem}.float.c p{font-size:.9rem}
-  .doodle{display:none}.creator{flex-direction:column}
+  .hero h1{font-size:2.3rem}
+  .hero{padding-bottom:4rem}
+  .stage,body.home .stage{height:auto;max-width:none;padding:1rem 0 2rem}
+  .stage .phone,body.home .stage .phone{position:relative;left:auto;top:auto;transform:none;margin:0 auto;width:min(18rem,80vw)}
+  .float,.doodle{display:none}
+  .spark{display:none}
+  .creator{flex-direction:column}
 }
 @media(max-width:480px){
-  header.top{flex-direction:column;gap:.6rem;align-items:flex-start}nav{flex-wrap:wrap;gap:.6rem .9rem}
-  .stage{height:32rem}.phone{width:15.5rem;transform:translateX(-50%) rotate(0)}
-  .float.a,.float.b{display:none}.float.c{bottom:0;width:11.5rem;padding:.8rem .9rem}
-  .hero h1{font-size:2rem}.hero .lead{font-size:1.1rem}.card-demo{font-size:1.25rem}
+  header.top{flex-direction:row;align-items:center;gap:1rem;padding:.6rem 0}.brand{margin-right:0}.brand img{height:2.6rem}nav{flex-wrap:nowrap;gap:.9rem}nav a{font-size:.9rem}
+  .hero{padding:1rem 0 2.5rem}
+  .hero-copy img.logo{width:min(15rem,62vw);margin:0 auto 1.1rem;transform:rotate(-3deg)}
+  .hero h1{font-size:1.7rem;letter-spacing:-.02rem;margin-bottom:.6rem}.hero .lead{font-size:1rem;margin-bottom:1.1rem}
+  .stores{gap:.6rem;flex-wrap:nowrap}.store img{height:2.7rem}
+  .stage{padding:.5rem 0 1rem}.stage .phone,body.home .stage .phone{width:min(16rem,72vw)}
+  body.home footer,footer{padding-top:1.2rem;padding-bottom:1.2rem}
+  .card-demo{font-size:1.25rem}
   .page-hero h1{font-size:2.2rem}h2{font-size:1.8rem}
 }
